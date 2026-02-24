@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual env
+venv/
+backend/venv/
+
+# Downloads
+backend/downloads/
+
+# OS
+.DS_Store
