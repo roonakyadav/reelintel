@@ -1,38 +1,45 @@
 import re
+from collections import Counter
 
 
-# Known AI / Dev Tools (expand over time)
-KNOWN_TOOLS = [
-    "lovable",
-    "cursor",
-    "v0",
-    "notion",
-    "chatgpt",
-    "figma",
-    "github",
-    "canva",
-    "replit",
-    "vercel",
-    "netlify",
-    "openai"
-]
+def tokenize(text: str):
+    return re.findall(r'\b[A-Za-z0-9+\-]{3,}\b', text)
 
 
-def detect(text: str):
-    text_lower = text.lower()
+def detect(audio_text: str, visual_text: str):
 
-    found = set()
+    audio_tokens = tokenize(audio_text)
+    visual_tokens = tokenize(visual_text)
 
-    # 1. Match known tools
-    for tool in KNOWN_TOOLS:
-        if tool in text_lower:
-            found.add(tool.capitalize())
+    audio_counter = Counter([w.lower() for w in audio_tokens])
+    visual_counter = Counter([w.lower() for w in visual_tokens])
 
-    # 2. Extract capitalized words (possible brands)
-    words = re.findall(r"\b[A-Z][a-zA-Z0-9]+\b", text)
+    all_candidates = set(audio_counter.keys()).union(set(visual_counter.keys()))
 
-    for w in words:
-        if len(w) >= 3:
-            found.add(w)
+    results = {}
 
-    return list(found)
+    for word in all_candidates:
+
+        score = 0
+
+        # Appears in audio
+        if word in audio_counter:
+            score += 3
+
+        # Appears in OCR
+        if word in visual_counter:
+            score += 2
+
+        # Frequency bonus
+        total_freq = audio_counter[word] + visual_counter[word]
+        if total_freq > 2:
+            score += 1
+
+        # Context bonus
+        if any(ctx in word for ctx in ["ai", "ide", "code", "dev"]):
+            score += 2
+
+        if score >= 4:
+            results[word.capitalize()] = score
+
+    return results

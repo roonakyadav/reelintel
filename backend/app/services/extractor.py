@@ -9,7 +9,13 @@ from app.services.frame_extractor import extract_frames
 BASE_DIR = "downloads"
 
 print("Loading Whisper model...")
-MODEL = whisper.load_model("base")
+import torch
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+print(f"Using device: {device}")
+
+MODEL = whisper.load_model("base").to(device)
 print("Whisper model loaded.")
 
 
@@ -90,4 +96,11 @@ def extract(url: str):
     # os.remove(video_path)
     # os.remove(audio_path)
 
-    return transcript
+    # ---------------------------
+    # 6️⃣ Return All Data (IMPORTANT)
+    # ---------------------------
+    return {
+        "transcript": transcript,
+        "video_path": video_path,
+        "frames_dir": frames_dir
+    }
