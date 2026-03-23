@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+
+# Env
+.env
+
+# Media files (IMPORTANT)
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.wav
+
+# Downloads folder
+backend/downloads/
+
+# OS junk
+.DS_Store
