@@ -4,7 +4,7 @@ from app.services.vision import analyze_frames
 from app.services.intelligence import build_fingerprint
 from app.services.retriever import build_search_query, search_web
 
-router = APIRouter(
+router = APIRouter()
 
 
 @router.post("/analyze")
