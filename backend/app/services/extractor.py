@@ -33,7 +33,7 @@ def extract(url: str):
     audio_path = f"{BASE_DIR}/{file_id}.wav"
     frames_dir = f"{BASE_DIR}/{file_id}_frames"
 
-    # ---------------------------
+
     # 1️⃣ Download Reel
     # ---------------------------
     print("Downloading video...")
