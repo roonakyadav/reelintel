@@ -45,7 +45,6 @@ def extract(url: str):
         check=True
     )
 
-    # ---------------------------
     # 2️⃣ Extract Audio
     # ---------------------------
     print("Extracting audio...")
