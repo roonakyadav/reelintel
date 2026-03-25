@@ -22,7 +22,7 @@ print("Whisper model loaded.")
 def extract(url: str):
     print("Starting extraction...")
 
-    # Remove tracking params
+
     url = url.split("?")[0]
 
     os.makedirs(BASE_DIR, exist_ok=True)
