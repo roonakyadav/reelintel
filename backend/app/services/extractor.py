@@ -8,7 +8,7 @@ from app.services.frame_extractor import extract_frames
 
 BASE_DIR = "downloads"
 
-print("Loading Whisper model...")
+print("Loading Whisper model..."
 import torch
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
