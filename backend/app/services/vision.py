@@ -15,4 +15,4 @@ def analyze_frames(frames_dir: str):
 
     print("VISUAL TEXT:", visual_text)
 
-    return visual_tex
+    return visual_text
